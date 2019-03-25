@@ -1,0 +1,32 @@
+{
+  "name": "evergloam",
+  "version": "1.0.0",
+  "description": "Simple Social Network on Node.js, Koa.js, MongoDB and React.js stack",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EgorRepnikov/evergloam.git"
+  },
+  "author": "Egor Repnikov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EgorRepnikov/evergloam/issues"
+  },
+  "homepage": "https://github.com/EgorRepnikov/evergloam#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "dotenv": "^7.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-passport": "^4.1.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.4.19",
+    "mongoose-private-paths": "^0.7.0",
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
