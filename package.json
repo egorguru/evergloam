@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Simple Social Network on Node.js, Koa.js, MongoDB and React.js stack",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js",
+    "dev": "concurrently \"npm run server\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EgorRepnikov/evergloam.git"
