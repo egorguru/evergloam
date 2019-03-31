@@ -19,16 +19,16 @@ router.post('/', passport.authenticate('jwt', {
 })
 
 router.get('/', async (ctx) => {
-  const { query } = ctx
-  ctx.body = await Subscription.find(query)
+  ctx.body = await Subscription.find(ctx.query)
 })
 
 router.delete('/:_id', passport.authenticate('jwt', {
   session: false
 }), async (ctx) => {
-  const { _id } = ctx.params
-  const subscriber = ctx.state.user._id
-  await Subscription.findOneAndDelete({ _id, subscriber })
+  await Subscription.findOneAndDelete({
+    _id: ctx.params._id,
+    subscriber: ctx.state.user._id
+  })
   ctx.body = { message: 'You was unsubscribed' }
 })
 

@@ -5,8 +5,7 @@ const User = require('../models/User')
 const router = new Router().prefix('/users')
 
 router.get('/:_id', async (ctx) => {
-  const { _id } = ctx.params
-  const user = await User.findById(_id)
+  const user = await User.findById(ctx.params._id)
   if (user) {
     ctx.body = user
   } else {

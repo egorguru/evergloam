@@ -7,8 +7,8 @@ const router = new Router().prefix('/posts')
 
 router.post('/', passport.authenticate('jwt', { session: false }), async (ctx) => {
   const { body } = ctx.request.body
-  const { user } = ctx.state
-  ctx.body = await new Post({ body, user: user._id }).save()
+  const user = ctx.state.user._id
+  ctx.body = await new Post({ body, user }).save()
   ctx.status = 201
 })
 
@@ -19,7 +19,7 @@ router.get('/', async (ctx) => {
   delete query.limit
   const q = 'users' in query ?
     { user: { $in: query.users.split(',') } } : query
-  ctx.set('x-total-count', await getTotalCount(q))
+  ctx.set('x-total-count', await Post.count(q))
   ctx.body = await Post
     .find(q)
     .sort({ createdDate: -1 })
@@ -27,13 +27,8 @@ router.get('/', async (ctx) => {
     .limit(+limit)
 })
 
-async function getTotalCount(query) {
-  return await Post.count(query)
-}
-
 router.get('/:id', async (ctx) => {
-  const { id } = ctx.params
-  const post = await Post.findById(id)
+  const post = await Post.findById(ctx.params.id)
   if (post) {
     ctx.body = post
   } else {
@@ -52,9 +47,10 @@ router.put('/', passport.authenticate('jwt', { session: false }), async (ctx) =>
 })
 
 router.delete('/:_id', passport.authenticate('jwt', { session: false }), async (ctx) => {
-  const { _id } = ctx.params
-  const user = ctx.state.user._id
-  await Post.findOneAndRemove({ _id, user })
+  await Post.findOneAndRemove({
+    _id: ctx.params._id,
+    user: ctx.state.user._id
+  })
   ctx.body = { message: 'Post has been deleted' }
 })
 
