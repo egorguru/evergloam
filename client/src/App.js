@@ -6,6 +6,7 @@ import store from './store'
 
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import Register from './components/auth/Register'
 import NotFound from './components/not-found/NotFound'
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
           <React.Fragment>
             <Header />
             <div className="container">
+              <Route path="/register" component={Register} />
               <Route path="/404" component={NotFound} />
             </div>
             <Footer />
