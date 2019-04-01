@@ -1,10 +1,56 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
+import { logout } from '../../actions/authActions'
 
 class Header extends React.Component {
 
+  onLogout(e) {
+    e.preventDefault()
+    this.props.logout()
+  }
+
   render() {
+    const { isAuthenticated, user } = this.props.auth
+    let links
+    if (isAuthenticated) {
+      links = (
+        <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i className="fa fa-user"></i>
+            Account
+          </a>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <Link className="dropdown-item" to={'/user/' + user.id}>My Profile</Link>
+            <div className="dropdown-divider"></div>
+            <a
+              className="dropdown-item"
+              href="#"
+              onClick={this.onLogout.bind(this)}
+            >Log Out</a>
+          </div>
+        </li>
+      )
+    } else {
+      links = (
+        <React.Fragment>
+          <li className="nav-item">
+            <Link className="nav-link" to="/login">
+              <i className="fa fa-sign-in"></i>
+              Log In
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/register">
+              <i className="fa fa-user-plus"></i>
+              Register
+            </Link>
+          </li>
+        </React.Fragment>
+      )
+    }
     return (
       <nav className="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
@@ -20,15 +66,17 @@ class Header extends React.Component {
                   All Posts
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/feed">
-                  <i className="fa fa-rss"></i>
-                  Feed
-                </Link>
-              </li>
+              {isAuthenticated && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/feed">
+                    <i className="fa fa-rss"></i>
+                    Feed
+                  </Link>
+                </li>
+              )}
             </ul>
             <ul className="navbar-nav">
-              {/* Links */}
+              {links}
             </ul>
           </div>
         </div>
@@ -37,6 +85,13 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({})
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
 
-export default connect(mapStateToProps)(Header)
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { logout })(Header)
