@@ -6,6 +6,7 @@ import store from './store'
 
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import NotFound from './components/not-found/NotFound'
 
@@ -18,6 +19,7 @@ class App extends React.Component {
             <Header />
             <div className="container">
               <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
               <Route path="/404" component={NotFound} />
             </div>
             <Footer />
