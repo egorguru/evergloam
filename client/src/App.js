@@ -13,6 +13,7 @@ import Footer from './components/layout/Footer'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import AllPosts from './components/all-posts/AllPosts'
+import SinglePost from './components/single-post/SinglePost'
 import NotFound from './components/not-found/NotFound'
 
 if (localStorage.access_token) {
@@ -38,6 +39,7 @@ class App extends React.Component {
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
               <Route exact path="/" component={AllPosts} />
+              <Route path="/post/:id" component={SinglePost} />
               <Route path="/404" component={NotFound} />
             </div>
             <Footer />
