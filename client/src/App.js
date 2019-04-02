@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode'
 
@@ -8,6 +8,7 @@ import setAuthToken from './utils/setAuthToken'
 
 import { setCurrentUser, logout } from './actions/authActions'
 
+import PrivateRoute from './components/shared/PrivateRoute'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Login from './components/auth/Login'
@@ -15,6 +16,7 @@ import Register from './components/auth/Register'
 import AllPosts from './components/all-posts/AllPosts'
 import SinglePost from './components/single-post/SinglePost'
 import UserProfile from './components/user-profile/UserProifle'
+import Feed from './components/feed/Feed'
 import NotFound from './components/not-found/NotFound'
 
 if (localStorage.access_token) {
@@ -42,6 +44,9 @@ class App extends React.Component {
               <Route exact path="/" component={AllPosts} />
               <Route path="/post/:id" component={SinglePost} />
               <Route path="/user/:id" component={UserProfile} />
+              <Switch>
+                <PrivateRoute path="/feed" component={Feed} />
+              </Switch>
               <Route path="/404" component={NotFound} />
             </div>
             <Footer />
