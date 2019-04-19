@@ -19,7 +19,7 @@ router.get('/', async (ctx) => {
   delete query.limit
   const q = 'users' in query ?
     { user: { $in: query.users.split(',') } } : query
-  ctx.set('x-total-count', await Post.count(q))
+  ctx.set('x-total-count', await Post.countDocuments(q))
   ctx.body = await Post
     .find(q)
     .sort({ createdDate: -1 })
