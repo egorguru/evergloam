@@ -13,12 +13,11 @@ class Subscription extends React.Component {
 
   onSubClick = (e) => {
     e.preventDefault()
-    const { subscription, auth, userId } = this.props
+    const { subscription: { subscriptions }, auth, userId } = this.props
     if (!auth.isAuthenticated) {
       this.props.history.push('/login')
     } else {
-      const existedSub = subscription.subscriptions
-        .find((s) => s.subscriber === auth.user.id)
+      const existedSub = subscriptions.find((s) => s.subscriber === auth.user.id)
       if (existedSub) {
         this.props.remove(existedSub._id)
       } else {

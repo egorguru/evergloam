@@ -24,13 +24,13 @@ export const getAll = (params = {}) => (dispatch) => {
       type: GET_SUBSCRIPTIONS,
       payload: res.data
     }))
-    .catch((e) => dispatch(setSubscriptionLoading(false)))
+    .catch(() => dispatch(setSubscriptionLoading(false)))
 }
 
 export const remove = (id) => (dispatch) => {
   axios
     .delete(`/api/subscriptions/${id}`)
-    .then((res) => dispatch({
+    .then(() => dispatch({
       type: DELETE_SUBSCRIPTION,
       payload: id
     }))

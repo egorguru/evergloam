@@ -10,7 +10,7 @@ export const getUserById = (id) => (dispatch) => {
       type: GET_USER,
       payload: res.data
     }))
-    .catch((e) => dispatch(setUserLoading(false)))
+    .catch(() => dispatch(setUserLoading(false)))
 }
 
 const setUserLoading = (isLoading) => ({

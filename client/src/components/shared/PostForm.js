@@ -9,9 +9,7 @@ class PostForm extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      body: ''
-    }
+    this.state = { body: '' }
   }
 
   onChangeBody = (body) => this.setState({ body })
@@ -57,8 +55,6 @@ PostForm.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth
-})
+const mapStateToProps = (state) => ({ auth: state.auth })
 
 export default connect(mapStateToProps, { create })(PostForm)

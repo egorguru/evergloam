@@ -30,7 +30,7 @@ export const getAll = (params) => (dispatch) => {
         totalCount: +res.headers['x-total-count']
       }
     }))
-    .catch((e) => {
+    .catch(() => {
       dispatch(setPostLoading(false))
       dispatch(clearPosts())
     })
@@ -44,13 +44,13 @@ export const getById = (id) => (dispatch) => {
       type: GET_POST,
       payload: res.data
     }))
-    .catch((e) => dispatch(setPostLoading(false)))
+    .catch(() => dispatch(setPostLoading(false)))
 }
 
 export const remove = (id) => (dispatch) => {
   axios
     .delete(`/api/posts/${id}`)
-    .then((res) => dispatch({
+    .then(() => dispatch({
       type: DELETE_POST,
       payload: id
     }))

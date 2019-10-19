@@ -22,38 +22,38 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    const { user, auth } = this.props
-    return !user.isLoading && user.user !== null ? (
+    const { user: { user, isLoading }, auth } = this.props
+    return !isLoading && user !== null ? (
       <React.Fragment>
         <div className="row mt-5">
           <div className="col-md-6 mx-auto">
             <div className="row">
               <div className="col-8">
-                <h2 className="profile-username">{user.user.name}</h2>
+                <h2 className="profile-username">{user.name}</h2>
                 <p>
                   <strong>Registered: </strong>
-                  {new Date(user.user.createdDate).toDateString()}
+                  {new Date(user.createdDate).toDateString()}
                 </p>
               </div>
               <div className="col-4 text-center">
-                <ProfileImage user={user.user} />
+                <ProfileImage user={user} />
               </div>
             </div>
           </div>
         </div>
-        {!(auth.user.id === user.user._id) && (
+        {!(auth.user.id === user._id) && (
           <div className="row mt-4">
             <div className="col-md-12 text-center">
               <div className="col-4 mx-auto">
-                <Subscription userId={user.user._id} />
+                <Subscription userId={user._id} />
               </div>
             </div>
           </div>
         )}
         <div className="row mt-4">
           <div className="col-md-6 mx-auto">
-            {auth.user.id === user.user._id && <PostForm />}
-            <Posts queryParams={{ user: user.user._id }} />
+            {auth.user.id === user._id && <PostForm />}
+            <Posts queryParams={{ user: user._id }} />
           </div>
         </div>
       </React.Fragment>

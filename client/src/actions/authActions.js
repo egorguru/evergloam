@@ -4,10 +4,10 @@ import jwtDecode from 'jwt-decode'
 import { SET_CURRENT_USER } from './types'
 import setAuthToken from '../utils/setAuthToken'
 
-export const register = (userData, history) => (dispatch) => {
+export const register = (userData, history) => () => {
   axios
     .post('/api/auth/register', userData)
-    .then((res) => history.push('/login'))
+    .then(() => history.push('/login'))
 }
 
 export const login = (userData) => (dispatch) => {

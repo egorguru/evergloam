@@ -9,9 +9,7 @@ class CommentForm extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      body: ''
-    }
+    this.state = { body: '' }
   }
 
   onChangeBody = (body) => this.setState({ body })
@@ -53,8 +51,6 @@ CommentForm.propTypes = {
   postId: PropTypes.string.isRequired
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth
-})
+const mapStateToProps = (state) => ({ auth: state.auth })
 
 export default connect(mapStateToProps, { createComment })(CommentForm)
