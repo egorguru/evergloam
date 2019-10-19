@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Pagination from "react-js-pagination"
 
 import { UPDATE_POSTS } from '../../actions/types'
 import { getAll } from '../../actions/postActions'
@@ -8,30 +9,21 @@ import { getAll } from '../../actions/postActions'
 import Post from './Post'
 import Loader from './Loader'
 
+const LIMIT = 10
+
 class Posts extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      skip: 0,
-      limit: 10
-    }
+    this.state = { activePage: 1 }
   }
 
   componentDidMount() {
     this.props.getAll(this.getQueryParams())
   }
 
-  onClickBack = (e) => {
-    e.preventDefault()
-    this.setState({ skip: this.state.skip - this.state.limit }, () => {
-      this.props.getAll(this.getQueryParams())
-    })
-  }
-
-  onClickLoadMore = (e) => {
-    e.preventDefault()
-    this.setState({ skip: this.state.skip + this.state.limit }, () => {
+  onPageChange = (activePage) => {
+    this.setState({ activePage }, () => {
       this.props.getAll(this.getQueryParams())
     })
   }
@@ -39,42 +31,33 @@ class Posts extends React.Component {
   getQueryParams() {
     return Object.assign(
       {
-        skip: this.state.skip,
-        limit: this.state.limit
+        skip: (this.state.activePage - 1) * LIMIT,
+        limit: LIMIT
       },
       this.props.queryParams
     )
   }
 
-  roundTo10(num) {
-    return Math.ceil(num / 10) * 10;
-  }
-
   render() {
     const { isLoading, posts, totalCount } = this.props.post
-    const { skip, limit } = this.state
     return (
       <React.Fragment>
         {isLoading && <Loader />}
-        {!isLoading && posts.length === 0 && (
+        {!isLoading && totalCount === 0 && (
           <div className="text-center">
             <h2>There is nothing</h2>
           </div>
         )}
         {posts.map((p) => <Post post={p} key={p._id} TYPE={UPDATE_POSTS} />)}
-        {skip !== 0 && !isLoading && totalCount > posts.length && (
-          <button className="btn btn-dark" onClick={this.onClickBack}>
-            Newer
-          </button>
-        )}
-        {!isLoading && totalCount > posts.length &&
-          this.roundTo10(posts.length * (skip / limit + 1)) < this.roundTo10(totalCount) && (
-          <button
-            className="btn btn-dark float-right"
-            onClick={this.onClickLoadMore}
-          >
-            Older
-          </button>
+        {!isLoading && totalCount > posts.length && (
+          <Pagination
+            activePage={this.state.activePage}
+            itemsCountPerPage={LIMIT}
+            totalItemsCount={totalCount}
+            onChange={this.onPageChange}
+            itemClass="page-item"
+            linkClass="page-link"
+          />
         )}
       </React.Fragment>
     )
