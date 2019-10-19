@@ -11,7 +11,7 @@ class Subscription extends React.Component {
     this.props.getAll({ profile: this.props.userId })
   }
 
-  onSubClick(e) {
+  onSubClick = (e) => {
     e.preventDefault()
     const { subscription, auth, userId } = this.props
     if (!auth.isAuthenticated) {
@@ -32,7 +32,7 @@ class Subscription extends React.Component {
     return !isLoading && (
       <button
         className="btn btn-dark btn-block subscribe-btn"
-        onClick={this.onSubClick.bind(this)}
+        onClick={this.onSubClick}
       >
         Subscribe | <i className="fa fa-users"></i> {subscriptions.length}
       </button>

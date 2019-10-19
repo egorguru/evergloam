@@ -12,7 +12,6 @@ class Login extends React.Component {
       email: '',
       password: ''
     }
-    this.onChange = this.onChange.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,11 +20,9 @@ class Login extends React.Component {
     }
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value })
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault()
     this.props.login(this.state)
   }
@@ -37,7 +34,7 @@ class Login extends React.Component {
           <div className="card">
             <article className="card-body">
               <h4 className="card-title text-center mb-4 mt-1">Log In</h4>
-              <form onSubmit={this.onSubmit.bind(this)}>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <div className="input-group">
                     <div className="input-group-prepend">

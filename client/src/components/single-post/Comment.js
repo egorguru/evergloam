@@ -12,7 +12,7 @@ class Comment extends React.Component {
     this.refs.body.innerHTML = this.props.comment.body
   }
 
-  onDelete() {
+  onDelete = () => {
     this.props.removeComment(this.props.postId, this.props.comment._id)
   }
 
@@ -42,7 +42,7 @@ class Comment extends React.Component {
                 <div className="dropdown">
                   <button className="btn btn-link dropdown-toggle" type="button" id="drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="drop">
-                    <a className="dropdown-item" role="button" onClick={this.onDelete.bind(this)}>Remove</a>
+                    <a className="dropdown-item" role="button" onClick={this.onDelete}>Remove</a>
                   </div>
                 </div>
               )}

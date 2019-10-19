@@ -6,7 +6,7 @@ import { createLike, removeLike } from '../../../actions/postActions'
 
 class Like extends React.Component {
 
-  onLikeClick(e) {
+  onLikeClick = (e) => {
     e.preventDefault()
     const { auth, postId, likes, TYPE } = this.props
     if (auth.isAuthenticated) {
@@ -24,7 +24,7 @@ class Like extends React.Component {
     return (
       <a
         href="#" role="button"
-        className="card-link" onClick={this.onLikeClick.bind(this)}
+        className="card-link" onClick={this.onLikeClick}
       >
         <i className="fa fa-heart"></i> {likes.length}
       </a>

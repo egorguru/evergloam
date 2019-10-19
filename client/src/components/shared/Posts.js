@@ -22,14 +22,14 @@ class Posts extends React.Component {
     this.props.getAll(this.getQueryParams())
   }
 
-  onClickBack(e) {
+  onClickBack = (e) => {
     e.preventDefault()
     this.setState({ skip: this.state.skip - this.state.limit }, () => {
       this.props.getAll(this.getQueryParams())
     })
   }
 
-  onClickLoadMore(e) {
+  onClickLoadMore = (e) => {
     e.preventDefault()
     this.setState({ skip: this.state.skip + this.state.limit }, () => {
       this.props.getAll(this.getQueryParams())
@@ -63,7 +63,7 @@ class Posts extends React.Component {
         )}
         {posts.map((p) => <Post post={p} key={p._id} TYPE={UPDATE_POSTS} />)}
         {skip !== 0 && !isLoading && totalCount > posts.length && (
-          <button className="btn btn-dark" onClick={this.onClickBack.bind(this)}>
+          <button className="btn btn-dark" onClick={this.onClickBack}>
             Newer
           </button>
         )}
@@ -71,7 +71,7 @@ class Posts extends React.Component {
           this.roundTo10(posts.length * (skip / limit + 1)) < this.roundTo10(totalCount) && (
           <button
             className="btn btn-dark float-right"
-            onClick={this.onClickLoadMore.bind(this)}
+            onClick={this.onClickLoadMore}
           >
             Older
           </button>

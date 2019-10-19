@@ -14,9 +14,7 @@ class Post extends React.Component {
     this.refs.body.innerHTML = this.props.post.body
   }
 
-  onDelete() {
-    this.props.remove(this.props.post._id)
-  }
+  onDelete = () => this.props.remove(this.props.post._id)
 
   render() {
     const { post, auth, TYPE } = this.props
@@ -41,7 +39,7 @@ class Post extends React.Component {
               <div className="dropdown">
                 <button className="btn btn-link dropdown-toggle" type="button" id="drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="drop">
-                  <a className="dropdown-item" role="button" onClick={this.onDelete.bind(this)}>Remove</a>
+                  <a className="dropdown-item" role="button" onClick={this.onDelete}>Remove</a>
                 </div>
               </div>
             )}

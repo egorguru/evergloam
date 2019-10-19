@@ -12,15 +12,11 @@ class CommentForm extends React.Component {
     this.state = {
       body: ''
     }
-    this.onChangeBody = this.onChangeBody.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onChangeBody(body) {
-    this.setState({ body })
-  }
+  onChangeBody = (body) => this.setState({ body })
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault()
     const { body } = this.state
     this.props.createComment(this.props.postId, { body })

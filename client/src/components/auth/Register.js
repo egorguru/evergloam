@@ -13,7 +13,6 @@ class Register extends React.Component {
       email: '',
       password: ''
     }
-    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount() {
@@ -22,11 +21,9 @@ class Register extends React.Component {
     }
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value })
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault()
     this.props.register(this.state, this.props.history)
   }
@@ -38,7 +35,7 @@ class Register extends React.Component {
           <div className="card">
             <article className="card-body">
               <h4 className="card-title text-center mb-4 mt-1">Registration</h4>
-              <form onSubmit={this.onSubmit.bind(this)}>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <div className="input-group">
                     <div className="input-group-prepend">

@@ -7,7 +7,7 @@ import { logout } from '../../actions/authActions'
 
 class Header extends React.Component {
 
-  onLogout(e) {
+  onLogout = (e) => {
     e.preventDefault()
     this.props.logout()
   }
@@ -28,7 +28,7 @@ class Header extends React.Component {
             <a
               className="dropdown-item"
               href="#"
-              onClick={this.onLogout.bind(this)}
+              onClick={this.onLogout}
             >Log Out</a>
           </div>
         </li>
