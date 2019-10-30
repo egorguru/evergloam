@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Pagination from "react-js-pagination"
@@ -11,57 +11,40 @@ import Loader from './Loader'
 
 const LIMIT = 10
 
-class Posts extends React.Component {
+const Posts = ({ getAll, queryParams, post: { isLoading, posts, totalCount } }) => {
+  const [activePage, setActivePage] = useState(1)
 
-  constructor() {
-    super()
-    this.state = { activePage: 1 }
-  }
+  useEffect(() => getAll(getQueryParams()), [])
 
-  componentDidMount() {
-    this.props.getAll(this.getQueryParams())
-  }
+  useEffect(() => getAll(getQueryParams()), [activePage])
 
-  onPageChange = (activePage) => {
-    this.setState({ activePage }, () => {
-      this.props.getAll(this.getQueryParams())
-    })
-  }
+  const getQueryParams = () => ({
+    ...queryParams,
+    skip: (activePage - 1) * LIMIT,
+    limit: LIMIT
+  })
 
-  getQueryParams() {
-    return Object.assign(
-      {
-        skip: (this.state.activePage - 1) * LIMIT,
-        limit: LIMIT
-      },
-      this.props.queryParams
-    )
-  }
-
-  render() {
-    const { isLoading, posts, totalCount } = this.props.post
-    return (
-      <React.Fragment>
-        {isLoading && <Loader />}
-        {!isLoading && totalCount === 0 && (
-          <div className="text-center">
-            <h2>There is nothing</h2>
-          </div>
-        )}
-        {posts.map((p) => <Post post={p} key={p._id} TYPE={UPDATE_POSTS} />)}
-        {!isLoading && totalCount > posts.length && (
-          <Pagination
-            activePage={this.state.activePage}
-            itemsCountPerPage={LIMIT}
-            totalItemsCount={totalCount}
-            onChange={this.onPageChange}
-            itemClass="page-item"
-            linkClass="page-link"
-          />
-        )}
-      </React.Fragment>
-    )
-  }
+  return (
+    <React.Fragment>
+      {isLoading && <Loader />}
+      {!isLoading && totalCount === 0 && (
+        <div className="text-center">
+          <h2>There is nothing</h2>
+        </div>
+      )}
+      {posts.map((p) => <Post post={p} key={p._id} TYPE={UPDATE_POSTS} />)}
+      {!isLoading && totalCount > posts.length && (
+        <Pagination
+          activePage={activePage}
+          itemsCountPerPage={LIMIT}
+          totalItemsCount={totalCount}
+          onChange={page => setActivePage(page)}
+          itemClass="page-item"
+          linkClass="page-link"
+        />
+      )}
+    </React.Fragment>
+  )
 }
 
 Posts.propTypes = {

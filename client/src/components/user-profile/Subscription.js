@@ -1,42 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 import { create, getAll, remove } from '../../actions/subscription'
 
-class Subscription extends React.Component {
+const Subscription = ({
+  create, getAll, remove,
+  auth, subscription: { subscriptions, isLoading },
+  history, userId
+}) => {
+  useEffect(() => getAll({ profile: userId }), [])
 
-  componentDidMount() {
-    this.props.getAll({ profile: this.props.userId })
-  }
-
-  onSubClick = (e) => {
+  const onSubClick = (e) => {
     e.preventDefault()
-    const { subscription: { subscriptions }, auth, userId } = this.props
     if (!auth.isAuthenticated) {
-      this.props.history.push('/login')
+      history.push('/login')
     } else {
       const existedSub = subscriptions.find((s) => s.subscriber === auth.user.id)
       if (existedSub) {
-        this.props.remove(existedSub._id)
+        remove(existedSub._id)
       } else {
-        this.props.create({ profile: userId })
+        create({ profile: userId })
       }
     }
   }
 
-  render() {
-    const { subscriptions, isLoading } = this.props.subscription
-    return !isLoading && (
-      <button
-        className="btn btn-dark btn-block subscribe-btn"
-        onClick={this.onSubClick}
-      >
-        Subscribe | <i className="fa fa-users"></i> {subscriptions.length}
-      </button>
-    )
-  }
+  return !isLoading && (
+    <button
+      className="btn btn-dark btn-block subscribe-btn"
+      onClick={onSubClick}
+    >
+      Subscribe | <i className="fa fa-users"></i> {subscriptions.length}
+    </button>
+  )
 }
 
 Subscription.propTypes = {
