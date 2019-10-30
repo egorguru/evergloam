@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { createLike, removeLike } from '../../../actions/postActions'
+import { createLike, removeLike } from '../../../actions/post'
 
 class Like extends React.Component {
 

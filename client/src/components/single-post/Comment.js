@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { removeComment } from '../../actions/postActions'
+import { removeComment } from '../../actions/post'
 
 import ProfileImage from '../shared/ProfileImage'
 

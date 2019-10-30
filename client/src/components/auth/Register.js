@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { register } from '../../actions/authActions'
+import { register } from '../../actions/auth'
 
 class Register extends React.Component {
 

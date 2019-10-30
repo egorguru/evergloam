@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { remove } from '../../../actions/postActions'
+import { remove } from '../../../actions/post'
 
 import Like from './Like'
 import ProfileImage from '../ProfileImage'

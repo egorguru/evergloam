@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Quill from 'react-quill'
 
-import { createComment } from '../../actions/postActions'
+import { createComment } from '../../actions/post'
 
 class CommentForm extends React.Component {
 

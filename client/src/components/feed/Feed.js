@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getAll as getAllSubscriptions } from '../../actions/subscriptionActions'
+import { getAll as getAllSubscriptions } from '../../actions/subscription'
 import Loader from '../shared/Loader'
 import Posts from '../shared/Posts'
 

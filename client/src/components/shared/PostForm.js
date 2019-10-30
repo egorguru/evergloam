@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Quill from 'react-quill'
 
-import { create } from '../../actions/postActions'
+import { create } from '../../actions/post'
 
 class PostForm extends React.Component {
 

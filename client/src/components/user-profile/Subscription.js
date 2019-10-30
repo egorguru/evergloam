@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
-import { create, getAll, remove } from '../../actions/subscriptionActions'
+import { create, getAll, remove } from '../../actions/subscription'
 
 class Subscription extends React.Component {
 

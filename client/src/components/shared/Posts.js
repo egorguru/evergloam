@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Pagination from "react-js-pagination"
 
 import { UPDATE_POSTS } from '../../actions/types'
-import { getAll } from '../../actions/postActions'
+import { getAll } from '../../actions/post'
 
 import Post from './Post'
 import Loader from './Loader'

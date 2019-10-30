@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { getUserById } from '../../actions/userActions'
+import { getUserById } from '../../actions/user'
 import Loader from '../shared/Loader'
 import PostForm from '../shared/PostForm'
 import Posts from '../shared/Posts'

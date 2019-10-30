@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { UPDATE_POST } from '../../actions/types'
-import { getById as getPostById } from '../../actions/postActions'
+import { getById as getPostById } from '../../actions/post'
 
 import Loader from '../shared/Loader'
 import Post from '../shared/Post'
