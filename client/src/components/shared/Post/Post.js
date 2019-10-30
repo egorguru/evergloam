@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -9,12 +9,7 @@ import Like from './Like'
 import ProfileImage from '../ProfileImage'
 
 const Post = ({ post, remove, auth, TYPE }) => {
-  const bodyRef = createRef()
-
-  useEffect(() => bodyRef.innerHTML = post.body, [])
-
   const onDelete = () => remove(post._id)
-
   return (
     <div className="card mb-4">
       <div className="card-header">
@@ -42,7 +37,7 @@ const Post = ({ post, remove, auth, TYPE }) => {
           )}
         </div>
       </div>
-      <div className="card-body" ref="body"></div>
+      <div className="card-body" dangerouslySetInnerHTML={{ __html: post.body }}></div>
       <div className="card-footer">
         <Like postId={post._id} likes={post.likes} TYPE={TYPE} />
         <Link to={'/post/' + post._id} className="card-link">

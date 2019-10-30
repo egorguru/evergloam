@@ -36,7 +36,7 @@ export const getAll = (params) => (dispatch) => {
     })
 }
 
-export const getById = (id) => (dispatch) => {
+export const getById = (id, history) => (dispatch) => {
   dispatch(setPostLoading(true))
   axios
     .get(`/api/posts/${id}`)
@@ -44,7 +44,10 @@ export const getById = (id) => (dispatch) => {
       type: GET_POST,
       payload: res.data
     }))
-    .catch(() => dispatch(setPostLoading(false)))
+    .catch(() => {
+      dispatch(setPostLoading(false))
+      history.push('/404')
+    })
 }
 
 export const remove = (id) => (dispatch) => {

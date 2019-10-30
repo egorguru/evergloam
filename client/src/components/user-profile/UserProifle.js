@@ -10,12 +10,7 @@ import ProfileImage from '../shared/ProfileImage'
 import Subscription from './Subscription'
 
 const UserProfile = ({ getUserById, match, history, user: { user, isLoading }, auth }) => {
-  useEffect(() => getUserById(match.params.id), [])
-  useEffect(() => {
-    if (!isLoading && user === null) {
-      history.push('/404')
-    }
-  }, [isLoading, user])
+  useEffect(() => getUserById(match.params.id, history), [])
 
   return !isLoading && user !== null ? (
     <React.Fragment>

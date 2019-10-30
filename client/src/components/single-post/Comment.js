@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -7,12 +7,7 @@ import { removeComment } from '../../actions/post'
 import ProfileImage from '../shared/ProfileImage'
 
 const Comment = ({ comment, postId, removeComment, auth }) => {
-  const bodyRef = createRef()
-
-  useEffect(() => bodyRef.innerHTML = comment.body, [])
-
   const onDelete = () => removeComment(postId, comment._id)
-
   return (
     <div className="card mb-3">
       <div className="card-body">
@@ -37,7 +32,7 @@ const Comment = ({ comment, postId, removeComment, auth }) => {
               <div className="dropdown">
                 <button className="btn btn-link dropdown-toggle" type="button" id="drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="drop">
-                  <a className="dropdown-item" role="button" onClick={this.onDelete}>Remove</a>
+                  <a className="dropdown-item" role="button" onClick={onDelete}>Remove</a>
                 </div>
               </div>
             )}
@@ -45,7 +40,7 @@ const Comment = ({ comment, postId, removeComment, auth }) => {
         </div>
         <hr />
         <div className="row">
-          <div className="col-md-12" ref={bodyRef}></div>
+          <div className="col-md-12" dangerouslySetInnerHTML={{ __html: comment.body }}></div>
         </div>
       </div>
     </div>

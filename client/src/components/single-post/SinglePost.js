@@ -11,13 +11,7 @@ import Comment from './Comment'
 import CommentForm from './CommentForm'
 
 const SinglePost = ({ getPostById, match, post, auth, history }) => {
-  useEffect(() => getPostById(match.params.id), [])
-
-  useEffect(() => {
-    if (!post.isLoading && post.post === null) {
-      history.push('/404')
-    }
-  }, [post])
+  useEffect(() => getPostById(match.params.id, history), [])
 
   return !post.isLoading && post.post !== null ? (
     <div className="row mt-5">
