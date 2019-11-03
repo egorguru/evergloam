@@ -6,9 +6,8 @@ const Context = createContext(initialState)
 
 export const Provider = ({ children }) => {
   const [state, setState] = useState(initialState)
-  const wrappedSetState = (newState) => setState({ ...state, ...newState })
   return (
-    <Context.Provider value={{ ...state, setState: wrappedSetState }}>
+    <Context.Provider value={{ ...state, setState }}>
       {children}
     </Context.Provider>
   )
@@ -17,10 +16,15 @@ export const Provider = ({ children }) => {
 export const connect = (mapStateToProps, actions) => (Component) => (props) => {
   const context = useContext(Context)
   const { setState } = context
-  const state = mapStateToProps(context)
   const wrappedActions = {}
   for (const key in actions) {
-    wrappedActions[key] = (...args) => actions[key](...args)({ state, setState })
+    wrappedActions[key] = (...args) => actions[key](...args)({ context, setState })
   }
-  return <Component {...props} {...state} {...wrappedActions}></Component>
+  return (
+    <Component
+      {...props}
+      {...mapStateToProps(context)}
+      {...wrappedActions}
+    ></Component>
+  )
 }

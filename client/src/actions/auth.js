@@ -9,7 +9,7 @@ export const register = (userData, history) => () => {
     .then(() => history.push('/login'))
 }
 
-export const login = (userData) => ({ setState }) => {
+export const login = (userData) => ({ state, setState }) => {
   axios
     .post('/api/auth/login', userData)
     .then((res) => {
@@ -18,7 +18,9 @@ export const login = (userData) => ({ setState }) => {
       setAuthToken(token)
       const decoded = jwtDecode(token)
       setState({
-        user: {
+        ...state,
+        auth: {
+          ...state.auth,
           user: decoded,
           isAuthenticated: true
         }
@@ -26,11 +28,13 @@ export const login = (userData) => ({ setState }) => {
     })
 }
 
-export const logout = () => ({ setState }) => {
+export const logout = () => ({ state, setState }) => {
   localStorage.removeItem('access_token')
   setAuthToken(false)
   setState({
-    user: {
+    ...state,
+    auth: {
+      ...state.auth,
       user: {},
       isAuthenticated: false
     }
