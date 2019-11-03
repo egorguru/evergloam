@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
+import { connect } from '../../store'
 import { logout } from '../../actions/auth'
 
 const Header = ({ logout, auth: { isAuthenticated, user } }) => {

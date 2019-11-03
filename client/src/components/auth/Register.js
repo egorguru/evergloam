@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { connect } from '../../store'
 import { register } from '../../actions/auth'
 
 const Register = ({ auth, history, register }) => {

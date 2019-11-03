@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { connect } from '../../store'
 import { UPDATE_POST } from '../../actions/types'
 import { getById as getPostById } from '../../actions/post'
 

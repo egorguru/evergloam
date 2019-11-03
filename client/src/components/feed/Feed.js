@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
+import { connect } from '../../store'
 import { getAll as getAllSubscriptions } from '../../actions/subscription'
 import Loader from '../shared/Loader'
 import Posts from '../shared/Posts'

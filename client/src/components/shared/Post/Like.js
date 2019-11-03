@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { connect } from '../../../store'
 import { createLike, removeLike } from '../../../actions/post'
 
 const Like = ({ auth, postId, likes, TYPE, removeLike, createLike }) => {

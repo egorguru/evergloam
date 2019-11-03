@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Pagination from "react-js-pagination"
+import Pagination from 'react-js-pagination'
 
+import { connect } from '../../store'
 import { UPDATE_POSTS } from '../../actions/types'
 import { getAll } from '../../actions/post'
 

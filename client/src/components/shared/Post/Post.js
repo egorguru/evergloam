@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import { connect } from '../../../store'
 import { remove } from '../../../actions/post'
 
 import Like from './Like'

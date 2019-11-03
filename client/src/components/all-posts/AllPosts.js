@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+
+import { connect } from '../../store'
 
 import PostForm from '../shared/PostForm'
 import Posts from '../shared/Posts'

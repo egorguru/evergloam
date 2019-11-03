@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { connect } from '../../store'
 import { getUserById } from '../../actions/user'
 import Loader from '../shared/Loader'
 import PostForm from '../shared/PostForm'
