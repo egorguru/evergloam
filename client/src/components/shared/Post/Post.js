@@ -1,14 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import { connect } from '../../../store'
 import { remove } from '../../../actions/post'
 
 import Like from './Like'
 import ProfileImage from '../ProfileImage'
 
-const Post = ({ post, remove, auth, TYPE }) => {
+const Post = ({ post, remove, auth }) => {
   const onDelete = () => remove(post._id)
   return (
     <div className="card mb-4">
@@ -39,7 +39,7 @@ const Post = ({ post, remove, auth, TYPE }) => {
       </div>
       <div className="card-body" dangerouslySetInnerHTML={{ __html: post.body }}></div>
       <div className="card-footer">
-        <Like postId={post._id} likes={post.likes} TYPE={TYPE} />
+        <Like postId={post._id} likes={post.likes} />
         <Link to={'/post/' + post._id} className="card-link">
           <i className="fa fa-arrow-right"></i>
         </Link>
@@ -51,8 +51,7 @@ const Post = ({ post, remove, auth, TYPE }) => {
 Post.propTypes = {
   remove: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  TYPE: PropTypes.string.isRequired
+  auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({ auth: state.auth })

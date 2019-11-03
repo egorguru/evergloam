@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { UPDATE_POST } from '../../actions/types'
+import { connect } from '../../store'
 import { getById as getPostById } from '../../actions/post'
 
 import Loader from '../shared/Loader'
@@ -12,11 +11,10 @@ import CommentForm from './CommentForm'
 
 const SinglePost = ({ getPostById, match, post, auth, history }) => {
   useEffect(() => getPostById(match.params.id, history), [])
-
   return !post.isLoading && post.post !== null ? (
     <div className="row mt-5">
       <div className="col-md-6 mx-auto">
-        <Post post={post.post} TYPE={UPDATE_POST} />
+        <Post post={post.post} />
         <div className="col-md-12 mx-auto">
           {auth.isAuthenticated && <CommentForm postId={post.post._id} />}
           {post.post.comments.map((c) => (

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Pagination from "react-js-pagination"
+import Pagination from 'react-js-pagination'
 
-import { UPDATE_POSTS } from '../../actions/types'
+import { connect } from '../../store'
 import { getAll } from '../../actions/post'
 
 import Post from './Post'
@@ -32,7 +31,7 @@ const Posts = ({ getAll, queryParams, post: { isLoading, posts, totalCount } }) 
           <h2>There is nothing</h2>
         </div>
       )}
-      {posts.map((p) => <Post post={p} key={p._id} TYPE={UPDATE_POSTS} />)}
+      {posts.map((p) => <Post post={p} key={p._id} />)}
       {!isLoading && totalCount > posts.length && (
         <Pagination
           activePage={activePage}

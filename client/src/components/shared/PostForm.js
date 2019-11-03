@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import Quill from 'react-quill'
 
+import { connect } from '../../store'
 import { create } from '../../actions/post'
 
 const PostForm = ({ create }) => {

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
-import { SET_CURRENT_USER } from './types'
 import setAuthToken from '../utils/setAuthToken'
 
 export const register = (userData, history) => () => {
@@ -10,7 +9,7 @@ export const register = (userData, history) => () => {
     .then(() => history.push('/login'))
 }
 
-export const login = (userData) => (dispatch) => {
+export const login = (userData) => ({ setState }) => {
   axios
     .post('/api/auth/login', userData)
     .then((res) => {
@@ -18,17 +17,22 @@ export const login = (userData) => (dispatch) => {
       localStorage.setItem('access_token', token)
       setAuthToken(token)
       const decoded = jwtDecode(token)
-      dispatch(setCurrentUser(decoded))
+      setState({
+        user: {
+          user: decoded,
+          isAuthenticated: true
+        }
+      })
     })
 }
 
-export const logout = () => (dispatch) => {
+export const logout = () => ({ setState }) => {
   localStorage.removeItem('access_token')
   setAuthToken(false)
-  dispatch(setCurrentUser({}))
+  setState({
+    user: {
+      user: {},
+      isAuthenticated: false
+    }
+  })
 }
-
-export const setCurrentUser = (user) => ({
-  type: SET_CURRENT_USER,
-  payload: user
-})

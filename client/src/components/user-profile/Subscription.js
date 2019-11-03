@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
+import { connect } from '../../store'
 import { create, getAll, remove } from '../../actions/subscription'
 
 const Subscription = ({
