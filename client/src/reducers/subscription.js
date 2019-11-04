@@ -5,12 +5,7 @@ import {
   DELETE_SUBSCRIPTION
 } from '../actions/types'
 
-const initialState = {
-  subscriptions: [],
-  isLoading: false
-}
-
-export default (state = initialState, action) => {
+export default (state, action) => {
   switch (action.type) {
     case SUBSCRIPTION_LOADING:
       return {

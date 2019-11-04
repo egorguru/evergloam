@@ -9,14 +9,7 @@ import {
   CLEAR_POSTS
 } from '../actions/types'
 
-const initialState = {
-  posts: [],
-  totalCount: 0,
-  post: null,
-  isLoading: false
-}
-
-export default (state = initialState, action) => {
+export default (state, action) => {
   switch (action.type) {
     case POST_LOADING:
       return {
